@@ -32,26 +32,29 @@ def operating(a,oper,b): #연산 함수
 
 
 ########## 입력 식 가공 ############################################
-# 입력 식 쪼개기
-def split_ex(exp):
+
+def split_ex(exp): # 입력 식 쪼개기
     return exp.split()
 
-def get_num_list(lst):
+def get_num_list(lst): # 숫자만 리스트로 Return
     return_list = []
     for i in range(0,len(lst),2):
         return_list.append(lst[i])
     return return_list
 
-def get_operator_list(lst):
+def get_operator_list(lst): # 연산자만 리스트로 Return
     return_list = []
     for i in range(1,len(lst),2):
         return_list.append(lst[i])
     return return_list
+
 ##################################################################
 
 
 ############ 오류 확인 ############################################
+
     #### 입력 식 판단 - 숫자 연산자 숫자 연산자 ... 이렇게 입력되었나 확인 #####
+    
 def even_is_num(lst):
     for i in range(0,len(lst),2):
         try:
@@ -65,6 +68,7 @@ def odd_is_operator(lst):
         if not(lst[i] in ['+','-','*','/']):
             return False
     return True
+
     ################################################################
     
     #### 0으로 나눈 적이 있나 확인 ######################################
@@ -77,11 +81,14 @@ def No_div_0_Error(lst_num, lst_opt):
         if float(lst_num[div_index[j]+1]) == 0.0:
             return False
     return True
+
     ################################################################
+    
 ####################################################################
 
 
 ############ 곱셈과 나눗셈 먼저 계산하게 해주는 함수 ##########################
+
 def priority_operating(lst_num, lst_opt):
     i = 0
     while i < len(lst_opt):
@@ -96,10 +103,12 @@ def priority_operating(lst_num, lst_opt):
         del lst_num[1]
         del lst_opt[0]
     print(lst_num[0])
+    
 ####################################################################
 
 
 ############ 메인 함수 ###############################################
+
 def main():
     expression = input("Enter expression: ") # 연산식 입력
     splitted_expression = split_ex(expression)
@@ -112,6 +121,7 @@ def main():
         print("Error: Division by zero.")
     else:
         priority_operating(num_list,operator_list)
+        
 ####################################################################
 
 
