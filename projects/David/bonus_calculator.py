@@ -50,17 +50,20 @@ def NumOpNum(exp): # 숫자, 연산자, 숫자 이렇게 3개로 쪼개는 함�
     except: # 안나눠지면 띄어쓰기 안했거나 항 개수가 3개 이상인 거임
         return 1,0,1
     
+def main():
+    expression = input("Enter expression: ") # 연산식 입력
+    num1,opt,num2 = NumOpNum(expression) # 연산식을 숫자, 연산자, 숫자로 바꿔
 
-expression = input("Enter expression: ") # 연산식 입력
-num1,opt,num2 = NumOpNum(expression) # 연산식을 숫자, 연산자, 숫자로 바꿔
+    result = operating(num1,opt,num2)
 
-result = operating(num1,opt,num2)
+    if (result == "E1"):
+        print("Error:Division by zero")
+    elif (result == "E2"):
+        print("Invalid operator")
+    elif (result == "E3"):
+        print("Invalid expression")
+    else:
+        print("Result:", result)
 
-if (result == "E1"):
-    print("Error:Division by zero")
-elif (result == "E2"):
-    print("Invalid operator")
-elif (result == "E3"):
-    print("Invalid expression")
-else:
-    print("Result:", result)
+if __name__ == "__main__":
+    main()
