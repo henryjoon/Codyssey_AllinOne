@@ -37,7 +37,10 @@ def split_values(val):
     return return_list
 
 
-input_value = input("Input numbers.")
-input_value_list = to_num_list(split_values(input_value))
+def main():
+    input_value = input("Input numbers.")
+    input_value_list = to_num_list(split_values(input_value))
 
-print(sorting(input_value_list))
+    print(sorting(input_value_list))
+
+main()

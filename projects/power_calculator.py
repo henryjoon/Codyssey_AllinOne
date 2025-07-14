@@ -19,8 +19,11 @@ def is_int(obj):
             return False
     return True
 
-number = input("Enter number: ")
-exponent = input("Enter Exponent: ")
+def main():
+    number = input("Enter number: ")
+    exponent = input("Enter Exponent: ")
 
-if (is_num(number) and is_int(exponent)):
-    print_power(number,exponent)
+    if (is_num(number) and is_int(exponent)):
+        print_power(number,exponent)    
+
+main()

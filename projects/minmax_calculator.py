@@ -34,9 +34,14 @@ def split_values(val):
 input_value = input("Input numbers.")
 input_value_list = split_values(input_value)
 
-if is_all_num(input_value_list) and is_not_empty(input_value_list):
-    print(get_max(input_value_list))
-    print(get_min(input_value_list))
+def main():
+    if is_all_num(input_value_list) and is_not_empty(input_value_list):
+        print(get_max(input_value_list))
+        print(get_min(input_value_list))
 
-else:
-    print("Invalid inputs")
+    else:
+        print("Invalid inputs")
+    
+
+if __name__ == "__main__":
+    main()
