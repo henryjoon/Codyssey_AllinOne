@@ -1,6 +1,7 @@
 from flask import Flask, request, Response
 import os
 from io import BytesIO
+# terminal에서 pip install gtts 해서 라이브러리 설치함
 from gtts import gTTS
 
 DEFAULT_LANG = os.getenv('DEFAULT_LANG','ko')
