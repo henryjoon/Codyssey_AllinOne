@@ -23,7 +23,7 @@ def is_int(number) -> bool: # 정수 판별 함수
         if float(number)==int(float(number)):
             return True
         else: return False
-    else: return Falseg
+    else: return False
     
     
 def main():
