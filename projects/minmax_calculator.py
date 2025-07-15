@@ -30,11 +30,10 @@ def is_not_empty(lst):
 def split_values(val):
     return_list = val.split()
     return return_list
-    
-input_value = input("Input numbers.")
-input_value_list = split_values(input_value)
 
 def main():
+    input_value = input("Input numbers.: ")
+    input_value_list = split_values(input_value)
     if is_all_num(input_value_list) and is_not_empty(input_value_list):
         print(get_max(input_value_list))
         print(get_min(input_value_list))
@@ -47,4 +46,4 @@ if __name__ == "__main__":
     main()
     
 
-# echo $SHELL
+# echo $SHELL >> bash 확인
