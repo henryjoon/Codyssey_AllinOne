@@ -30,8 +30,8 @@ def main():
     number = input("Enter number: ")
     exponent = input("Enter Exponent: ")
     
-    print(is_num(number))
-    print(is_int(exponent))
+    #print(is_num(number))
+    #print(is_int(exponent))
 
     if not(is_num(number) and is_int(exponent)):
         if is_num(number) == False:
