@@ -1,46 +1,81 @@
-def sorting(lst):
-    return_list = [] #새로운 리스트
-    for val in lst: #lst에 있는 값 모두 순회
-        inserted = False #기본적으로 '삽입됨'을 의미하는 변수 inserted의 값을 False로 설정함
-        for i in range(len(return_list)): #return_list 길이만큼 반복, 처음엔 0이니까 스킵
-            if val < return_list[i]:
-                return_list.insert(i, val)
-                inserted = True
-                break
-        if not inserted: #위에서 걸러지지 않았다면 inserted=False이고 val 값이 가장 큰 값이라는 것임.
-            return_list.append(val)
-    return return_list
+def swap(a,b):
+    return b,a
 
+def get_min(lst):
+    min_val = float(lst[0])
+    min_index = 0
+    for i in range(len(lst)):
+        if float(lst[i]) < float(min_val):
+            min_val = lst[i]
+            min_index = i
+    return float(min_val), min_index
+
+def bubble_sorting(lst):
+    while True:
+        sorted_sum = 0
+        repeat_time = len(lst)-1
+        for i in range(repeat_time):
+            if lst[i]>lst[i+1]:
+                lst[i], lst[i+1] = swap(lst[i],lst[i+1])
+                sorted_sum += 1
+                print("    -->", lst, "changed")
+            else:
+                print("    -->", lst, "not changed")
+        print("  ------------------")
+        if sorted_sum == 0:
+            return lst
+
+def Selection_sorting(lst):
+    repeat_time = len(lst) - 1
+    for i in range(repeat_time):
+        min_num, min_num_index = get_min(lst[i:])
+        lst[i],lst[min_num_index] = swap(lst[i],lst[min_num_index])
+        print("    -->", lst)
+    return lst
+        
     
-def is_all_num(lst):
-    for val in lst:
-        try:
-            float(val)
-        except:
-            return False
-    return True
 
-def is_not_empty(lst):
-    if len(lst) == 0:
-        return False
-    else:
+def Insertion_sorting(lst):
+    repeat_time = len(lst) - 1
+    return_list = [lst[0]]
+    for i in range(repeat_time):
+        for j in range(len(return_list)):
+            if lst[i+1] < return_list[j]:
+                index = j
+                break
+        lst[i],lst[index] = swap(lst[i],lst[index])
+        print("    -->", return_list)
+    return return_list
+
+def is_num(a):
+    try:
+        float(a)
         return True
-
+    except:
+        return False
+    
 def to_num_list(lst):
-    return_list=[]
-    for val in lst:
-        return_list.append(float(val))
-    return return_list
-
-def split_values(val):
-    return_list = val.split()
-    return return_list
-
+    for i in range(len(lst)):
+        lst[i] = float(lst[i])
+    return lst
 
 def main():
-    input_value = input("Input numbers.")
-    input_value_list = to_num_list(split_values(input_value))
+    numbers = input("input numbers you want to sort:")
+    numbers_list = to_num_list(numbers.split())
+    print("Numbers you input:", numbers_list)
+    print("------------------")
+    
+    print("  1. Bubble Sorting")
+    print("  After bubble_sort:", bubble_sorting(numbers_list))
+    print("------------------")
+    
+    print("  2. Selection Sorting")
+    print("After selection_sort:", Selection_sorting(numbers_list))
+    print("------------------")
+    
+    print("  3. Insertion Sorting")
+    print("After selection_sort:", Insertion_sorting(numbers_list))
+    print("------------------")
 
-    print(sorting(input_value_list))
-
-main()
+if __name__ == "__main__":
+    main()
