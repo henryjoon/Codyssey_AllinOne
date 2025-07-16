@@ -41,8 +41,8 @@ def main():
     is_operator, which_operator = which_opt(operator)
     
     if is_num_num1 and is_num_num2 and is_operator:
-        num1 = int(num1)
-        num2 = int(num2)
+        num1 = int(float(num1))
+        num2 = int(float(num2))
         
         match which_operator:
             case "add":

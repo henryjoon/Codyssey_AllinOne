@@ -25,7 +25,11 @@ def is_not_empty(lst):
         return False
     else:
         return True
-        
+
+def is_infinity(lst):
+    if "nan" in lst or "inf" in lst:
+        return True
+    return False
 
 def split_values(val):
     return_list = val.split()
@@ -34,7 +38,11 @@ def split_values(val):
 def main():
     input_value = input("Input numbers.: ")
     input_value_list = split_values(input_value)
-    if is_all_num(input_value_list) and is_not_empty(input_value_list):
+    
+    if is_infinity(input_value_list):
+        print("무한대 값은 비교하지 않습니다.")
+
+    elif is_all_num(input_value_list) and is_not_empty(input_value_list):
         print(get_max(input_value_list))
         print(get_min(input_value_list))
 
