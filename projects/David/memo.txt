@@ -1,0 +1,75 @@
+# 계산기
+
+요구사항
+    1. 입력 받은 숫자 반드시 정수형 변화
+    2. 
+
+예외처리
+    1. division by zero
+    2. Invalid operator
+
+숫자_1 입력
+    예외 발생 상황:
+        1. 숫자 아님
+        2. 
+
+부호 입력
+    예외 발생 상황:
+        1. +,-,*,/ 아님
+
+숫자_2 입력
+    예외 발생 상황:
+        1. 숫자 아님
+
+
+필요한 함수
+    1. is_num
+    2. is_opt
+
+
+Original calculator.py backup
+def add(a,b):
+    return int(a)+int(b)
+
+def subtract(a,b):
+    return int(a)-int(b)
+
+def multiply(a,b):
+    return int(a)*int(b)
+
+def divide(a,b):
+    try:
+        return int(a)/int(b)
+    except:
+        return "E1"
+
+def operating(a,oper,b):
+    match oper:
+        case '+':
+            return add(a,b)
+        case '-':
+            return subtract(a,b)
+        case '*':
+            return multiply(a,b)
+        case '/':
+            return divide(a,b)
+        case _:
+            return "E2"
+
+def main():
+    num1 = input("num1: ")
+    opt = input("operator: ")
+    num2 = input("num2: ")
+
+    result = operating(num1,opt,num2)
+
+    if (result == "E1"):
+        print("Error:Division by zero")
+    elif (result == "E2"):
+        print("Invalid operator")
+    else:
+        print("Result:", result)
+
+if __name__ == "__main__":
+    main()
+        
