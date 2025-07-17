@@ -1,23 +1,27 @@
 ########## 연산 기능 #################################################
 
-def add(a,b): #덧셈 함수
+def add(a,b) -> int:
+    return a+b
 
-    return_value = float(a)+float(b)
-    return return_value
-    
-def subtract(a,b): #뺄셈 함수
-    return_value = float(a)-float(b)
-    return return_value
+def subtract(a,b) -> int:
+    return a-b
 
-def multiply(a,b): #곱셈 함수
-    return_value = float(a)*float(b)
-    return return_value
+def multiply(a,b) -> int:
+    return a*b
 
-def divide(a,b): #나눗셈 함수
-    return_value = float(a)/float(b)
-    return return_value
+def divide(a,b) -> float:
+    return a/b
+
+def is_num(a) -> bool:
+    try:
+        float(a)
+        return True
+    except:
+        return False
     
 def operating(a,oper,b): #연산 함수
+    a = float(a)
+    b = float(b)
     match oper: # 연산자에 따라서 케이스 분류
         case '+': # 덧셈
             return add(a,b)

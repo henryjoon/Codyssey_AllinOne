@@ -32,7 +32,7 @@ def Selection_sorting(lst):
 def Insertion_sorting(lst):
     for i in range(1, len(lst)):
         key = lst[i]
-        for j in range(i):
+        for j in range(i): 
             if lst[j] > key:
                 lst.insert(j, key)  
                 del lst[i+1]         
