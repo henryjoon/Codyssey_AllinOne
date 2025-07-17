@@ -88,9 +88,81 @@ if __name__ == "__main__":
     [5,3,1,4]
     1. [5,3,1,4]->[1,3,5,4]->[1,3,5,4]->[1,3,4,5]
     ==> 교환 횟수가 정해짐
+    [4,2,5,1,3,6]
+        min_index = 3
+        real_min_index = 3
+    [1,2,5,4,3,6]
+        min_index = 0
+        real_min_index = 1
+    [1,2,5,4,3,6]
+        min_index=2
+        real_min_index=4
+    [1,2,3,4,5,6]
+    [1,2,3,4,5,6]
+    [1,2,3,4,5,6]
 
 3. 삽입 정렬
     앞 부분 정렬된 상태 유지하며 삽입
     두번째 원소부터 시작
     [4,2,5,1,3,6]
-    [4,2,5,1,3,6]->[2,4,5,1,3,6]->[2,4,5,1,3,6]->[1,2,4,5,3,6]->[1,2,3,4,5,6]->[1,2,3,4,5,6]
+        i=0
+            lst[0]>lst[1]
+                swap
+    [2,4,5,1,3,6]
+        i=1
+            lst[0]<lst[2]
+                no swap
+            lst[1]<lst[2]
+                no swap
+    [2,4,5,1,3,6]
+        i=2
+            lst[0]>lst[3]
+                swap
+                break
+    [1,2,4,5,3,6]
+        i=3
+            lst[0]<lst[4]
+                no swap
+            lst[1]<lst[4]
+                no swap
+            lst[2]<lst[4]
+                swap
+                break
+    [1,2,3,4,5,6]
+        i=4
+            lst[0]<lst[5]
+                no swap
+            lst[1]<lst[5]
+                no swap
+            lst[2]<lst[5]
+                no swap
+            lst[3]<lst[5]
+                no swap
+            lst[4]<lst[5]
+                no swap
+
+    [1,2,3,4,5,6]
+        i=5
+            lst[0]<lst[6]
+                no swap
+            lst[1]<lst[6]
+                no swap
+            lst[2]<lst[6]
+                no swap
+            lst[3]<lst[6]
+                no swap
+            lst[4]<lst[6]
+                no swap
+            lst[5]<lst[6]
+                no swap
+
+    [1,4,2,3]
+    i=0
+        inserted = False
+        j=0 -> lst[0]=1<lst[1]=4
+            no swap
+        print --> [1,4,2,3]
+    i=1
+        inserted = False
+        j=0 -> lst[1] lst[1]
+    i=2
