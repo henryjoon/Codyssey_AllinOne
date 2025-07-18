@@ -18,19 +18,74 @@ def is_num(a) -> bool:
         return True
     except:
         return False
+
+def operating(exp):
+    num_stack = []
+    postfix_list = exp.split()
+    operator = ['+','-','*','+']
+    #print(postfix_list)
     
-def operating(a,oper,b): #연산 함수
-    a = float(a)
-    b = float(b)
-    match oper: # 연산자에 따라서 케이스 분류
-        case '+': # 덧셈
-            return add(a,b)
-        case '-': # 뺄셈
-            return subtract(a,b)
-        case '*': # 곱셈
-            return multiply(a,b)
-        case '/': # 나눗셈
-            return divide(a,b)
+    for val in postfix_list:
+        if is_num(val):
+            num_stack.append(val)
+        elif val in operator:
+            num2 = num_stack.pop()
+            num1 = num_stack.pop()
+            match val:
+                case '+':
+                    num_stack.append(add(float(num1),float(num2)))
+                case '-':
+                    num_stack.append(subtract(float(num1),float(num2)))
+                case '*':
+                    num_stack.append(multiply(float(num1),float(num2)))
+                case '/':
+                    num_stack.append(divide(float(num1),float(num2)))
+        
+    print(num_stack[0])
+    
+
+def to_postfix(lst):
+    stack_list = []
+    priority1 = ['*', '/']
+    priority2 = ['+', '-']
+    expression = ""
+    next_of_bracket = False
+    for val in lst:
+        if is_num(val):
+            expression = expression + val + " "
+        else:
+            if not stack_list or val == '(':
+                stack_list.append(val)
+                if val == '(':
+                    next_of_bracket = True
+                else:
+                    next_of_bracket = False
+            elif next_of_bracket:
+                stack_list.append(val)
+                if val == '(':
+                    next_of_bracket = True
+                else:
+                    next_of_bracket = False
+            else:
+                if val in priority1:
+                    if stack_list[len(stack_list)-1] in priority1:
+                        expression = expression + stack_list.pop() + " "
+                        stack_list.append(val)
+                    elif stack_list[len(stack_list)-1] in priority2:
+                        stack_list.append(val)
+                elif val in priority2:
+                    expression = expression + stack_list.pop() + " "
+                    stack_list.append(val)
+                elif val == ')':
+                    while True:
+                        opt = stack_list.pop()
+                        if opt == '(':
+                            break
+                        else:
+                            expression = expression + opt + " "
+    while len(stack_list) != 0:
+        expression = expression + stack_list.pop() + " "
+    return expression
 
 ##################################################################
 
@@ -38,93 +93,52 @@ def operating(a,oper,b): #연산 함수
 ########## 입력 식 가공 ############################################
 
 def split_ex(exp): # 입력 식 쪼개기
-    return exp.split()
-
-def get_num_list(lst): # 숫자만 리스트로 Return
+    del_space_exp = ''
+    for txt in exp:
+        if txt != ' ':
+            del_space_exp += txt
+    
     return_list = []
-    for i in range(0,len(lst),2):
-        return_list.append(lst[i])
-    return return_list
-
-def get_operator_list(lst): # 연산자만 리스트로 Return
-    return_list = []
-    for i in range(1,len(lst),2):
-        return_list.append(lst[i])
+    element = ''
+    
+    for val in del_space_exp:
+        if val in ['+','-','*','/','(',')']:
+            if element != '':
+                return_list.append(element)
+                element = ''
+            return_list.append(val)
+        elif is_num(val):
+            element += val
+        else:
+            print("Invalid Input")
+    return_list.append(element)
     return return_list
 
 ##################################################################
 
+########## 오류 발생 확인 ###########################################
 
-############ 오류 확인 ############################################
 
-    #### 입력 식 판단 - 숫자 연산자 숫자 연산자 ... 이렇게 입력되었나 확인 #####
-    
-def even_is_num(lst):
-    for i in range(0,len(lst),2):
-        try:
-            float(lst[i])
-        except:
-            return False
-    return True
-
-def odd_is_operator(lst):
-    for i in range(1,len(lst),2):
-        if not(lst[i] in ['+','-','*','/']):
-            return False
-    return True
-
-    ################################################################
-    
-    #### 0으로 나눈 적이 있나 확인 ######################################
-def No_div_0_Error(lst_num, lst_opt):
-    div_index = []
-    for i in range(len(lst_opt)):
-        if lst_opt[i] == '/':
-            div_index.append(i)
-    for j in range(len(div_index)):
-        if float(lst_num[div_index[j]+1]) == 0.0:
-            return False
-    return True
-
-    ################################################################
-    
 ####################################################################
 
+########## 조건 판단 ###########################################
 
-############ 곱셈과 나눗셈 먼저 계산하게 해주는 함수 ##########################
-
-def priority_operating(lst_num, lst_opt):
-    i = 0
-    while i < len(lst_opt):
-        if lst_opt[i] in ['*', '/']:
-            lst_num[i] = operating(lst_num[i], lst_opt[i], lst_num[i+1])
-            del lst_num[i+1]
-            del lst_opt[i]
-        else:
-            i += 1
-    while len(lst_num)>1:
-        lst_num[0] = operating(lst_num[0], lst_opt[0], lst_num[1])
-        del lst_num[1]
-        del lst_opt[0]
-    print(lst_num[0])
-    
-####################################################################
-
+def is_num(a) -> bool:
+    try:
+        float(a)
+        return True
+    except:
+        return False
 
 ############ 메인 함수 ###############################################
 
 def main():
     expression = input("Enter expression: ") # 연산식 입력
     splitted_expression = split_ex(expression)
-    num_list = get_num_list(splitted_expression)
-    operator_list = get_operator_list(splitted_expression)
-    
-    if not(odd_is_operator(splitted_expression) and even_is_num(splitted_expression)):
-        print("Invalid Input")
-    elif not(No_div_0_Error(num_list,operator_list)):
-        print("Error: Division by zero.")
-    else:
-        priority_operating(num_list,operator_list)
+    postfix = to_postfix(splitted_expression)
+    #print(postfix)
+    operating(postfix)
+        
         
 ####################################################################
 
